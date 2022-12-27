@@ -1,0 +1,29 @@
+#+title: Readme
+* Jdump
+Ever needed to see whats in a massive json object?
+sure you can pretty print it, maybe syntaxt highlight with [[https://github.com/sharkdp/bat][bat]].
+~jdump~ is a tool to view the fields of an object and show nesting.
+
+** Usage
+Get help
+#+begin_src shell
+jdump -h
+#+end_src
+
+Print contents from a file
+#+begin_src shell
+jdump test.json
+#+end_src
+
+You can also pipe the data.
+As of writing i have not added the "concat" part yet.
+
+#+begin_src shell
+grep "foo" file.json | jdump > finds.txt
+#+end_src
+
+
+
+* TODO Add Functionality [0/2]
++ [ ] The concat function for json files as arrays
++ [ ] Get json from the web (with post options!)
