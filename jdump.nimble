@@ -1,9 +1,9 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.2.0"
 author        = "nsaspy"
 description   = "View and concat json files"
-license       = "MIT"
+license       = "MIT+nigger"
 srcDir        = "src"
 bin           = @["jdump"]
 
