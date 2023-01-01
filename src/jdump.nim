@@ -4,8 +4,6 @@ import tables
 import strformat
 import terminal
 proc format(doc: JsonNode, indent: int = 0, str: var string = ""): string =
-  if str == "":
-    str = "====\n"
   let pairs = doc.getFields
   for key in pairs.keys:
     case pairs[key].kind:
@@ -13,8 +11,17 @@ proc format(doc: JsonNode, indent: int = 0, str: var string = ""): string =
         var nstr = "\n" & indent(fmt"==={key}===:", indent) & "\n"
         var str1 = pairs[key].format(indent + 2, nstr)
         str &= str1
+      of JArray:
+        str &=  "\n" & indent(fmt"==={key}===:", indent) & "\n"
+        for node in doc[key].getElems:
+          case node.kind:
+            of JObject:
+              var str1 = node.format(indent + 2, str)
+              str &= str1
+            else:
+              str &= indent("\n" & "- " & node.getStr, indent + 2) & "\n"
       else:
-        str &= indent(fmt"{key}: "  & $pairs[key], indent) & "\n"
+        str &= indent("\n" & key & ": "  & pairs[key].getStr, indent) & "\n"
   result = str
 
 #proc fetchUrl(url: string, headers: Table[string, string] = newTab): JsonNode
